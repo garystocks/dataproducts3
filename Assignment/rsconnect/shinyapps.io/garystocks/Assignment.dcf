@@ -1,0 +1,12 @@
+name: Assignment
+title: Assignment
+username:
+account: garystocks
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 397594
+bundleId: 1526388
+url: https://garystocks.shinyapps.io/Assignment/
+when: 1533821884.9348
+asMultiple: FALSE
+asStatic: FALSE
