@@ -30,8 +30,8 @@ shinyServer(function(input, output) {
   ts1 <- ts(APPL_Open, frequency = 12)
         
   # Create training and test sets
-  ts1Train <- window(ts1, start = 1, end = 7)
-  ts1Test <- window(ts1, start = 7, end = 12)
+  ts1Train <- window(ts1, start = 1, end = 11)
+  ts1Test <- window(ts1, start = 11, end = 13)
         
   # Apply exponential smoothing
   ets1 <- ets(ts1Train, model = "MMM")
@@ -48,7 +48,7 @@ shinyServer(function(input, output) {
   output$plot1 <- renderPlot({
           
           # Draw forecast plot
-          plot(fcast, main = "", xlab = "Year", ylab = "Opening Stock Price ($)", bty = "n", pch = 16, xlim = c(0, 12), ylim = c(0, 250))
+          plot(fcast, main = "", xlab = "Year", ylab = "Opening Stock Price ($)", bty = "n", pch = 16, xlim = c(0, 13), ylim = c(0, 250))
 
           plotpoint <- reactive({
                   x <- input$FMonth
@@ -56,7 +56,7 @@ shinyServer(function(input, output) {
                   
           })
           
-          points(1 + (73 + input$FMonth) / 12, modelfcast(), col = "red", pch = 16, cex = 2)
+          points(11 + input$FMonth / 12, modelfcast(), col = "red", pch = 16, cex = 2)
           
           # Draw a red line with the test data forecast if selected
           if(input$ShowTestFcast) {
