@@ -9,7 +9,7 @@
 
 library(shiny)
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw a forecast plot
 shinyServer(function(input, output) {
   
   # Create forecast model 
