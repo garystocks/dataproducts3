@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Apple Stock Forecast</title>
+  <title>Apple Stock Price Forecast Model</title>
     
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -512,7 +512,7 @@ body {
 
 
 .reveal {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Helvetica', sans-serif;
 }
   
 .reveal h1,
@@ -521,7 +521,7 @@ body {
 .reveal h4,
 .reveal h5,
 .reveal h6 {
-  font-family: 'Arial', Impact, sans-serif;
+  font-family: 'Helvetica', Impact, sans-serif;
 }
 
 
@@ -749,7 +749,7 @@ hljs.initHighlightingOnLoad();
   <div class="slides">
 
 <section data-state="section" data-transition="default" data-transition-speed="default">
-<h1>Apple Stock Forecast</h1><p>Gary Stocks<br/>11 August 2018</p>
+<h1>Apple Stock Price Forecast Model</h1><p>Gary Stocks<br/>11 August 2018</p>
 
 <div class="slideContent" >
 
@@ -759,11 +759,11 @@ hljs.initHighlightingOnLoad();
 <section data-transition="default" data-transition-speed="default">
 <h3>Overview</h3>
 <div class="slideContent" >
-<p>The objective of this model is to forecast the underlying trend in Apple stock prices to use to decide whether to invest in Apple stock for the long term. A forecast model is built using historical Apple stock price data obtained from Yahoo. </p>
+<p>The objective of this model is to forecast the underlying trend in Apple stock prices to use as an input to a decision whether to invest in Apple stock.</p>
 
 <p>This presentation describes how the data is prepared and used to build a forecast model. The interactive Shiny app has been published <a href="https://garystocks.shinyapps.io/Assignment/">here</a>. The full code to build the model can be found on github <a href="https://github.com/garystocks/dataproducts3">here</a>.</p>
 
-<p>The model forecasts an upward trend in the Apple stock price. However, the actual stock prices for the preceding 18 months, used as test data, is much higher than the forecast values. This suggests the forecast model may be under-estimating the stock price which could be due to short-term factors and would need to be taken into account when deciding on the best time to invest.</p>
+<p>The model forecasts an upward trend in the Apple stock price. However, the actual stock prices for the preceding 18 months, used as test data, are much higher than the forecast values. This suggests the model may be under-estimating the price which may be due to short-term factors and would need to be taken into account when deciding on the best time to invest.</p>
 
 </div>
 
@@ -776,9 +776,8 @@ hljs.initHighlightingOnLoad();
 <p>The data is manipulated in the following way:</p>
 
 <ul>
-<li>Daily data is converted to monthly</li>
-<li>The opening monthly price is extracted</li>
-<li>The data is stored as a time series object</li>
+<li>Daily data is converted to monthly and the opening monthly price extracted</li>
+<li>The data is converted to time series and an exponential smoothing model applied</li>
 <li>Data for years 1 through 11 is used to train the forecast model</li>
 <li>The remaining data is used to test the model</li>
 </ul>
@@ -788,34 +787,27 @@ hljs.initHighlightingOnLoad();
 </section>
 <section data-transition="default" data-transition-speed="default">
 <h3>Forecast Plot</h3>
-<div class="mediaOnly slideContent" >
-<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-1"/></p>
+<div class="mediaInline slideContent" >
+<p><small> The plot shows the forecast opening monthly prices: in black for the training data, in green for the test data (current year to date and previous year), and in blue for the previous 18 months and 6 months ahead. </small></p>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAkFBMVEUAAAAAADoAAGYAAP8AOjoAOmYAOpAAZrYA/wA6AAA6ADo6AGY6OmY6OpA6ZmY6ZrY6kNtmAABmADpmAGZmOgBmOpBmZrZmtv+QOgCQOjqQOmaQZgCQkNuQtpCQ29uQ2/+xtc62ZgC2Zma225C2/7a2///bkDrb25Db29/b/7bb////tmb/25D//7b//9v////8hnlsAAAACXBIWXMAAAsSAAALEgHS3X78AAATPklEQVR4nO2d6WLbNhZG4aT1ktQT2UnHTjqNrWmtUa3t/d9uCG4iRZAELrHf7/ywFhogiCOsJEFxAiwRoRMAwgDxTIF4pkA8UyCeKRDPFIhnCsQzBeKZAvFMgXimQDxTIJ4pEM8UiGcKxDMF4pkC8UyBeKZAPFMgnikQzxSIZwrEMwXimQLxTIF4pkA8UyCeKRDPFIhnCsQzBeKZAvFMgXimQDxTIJ4pEM8UiGcKxDMF4pkC8UyBeKZAPFMgnikQzxSIZwrEMwXimQLxTIF4pkA8UyCeKRDPFIhnCsQzBeKZAvFMgfg02Q4xiwDi0wTimQLxTPEgfn8nJB/eiEkELnAv/vj8VL7urt9JKQROcC/+8PWt9wqiACWeJwrv1tv4wwPa+OjwIR5ECMQzxYN42amTtf2yJn7/eaSlaLoQZI7PYrUsCdoBzl+cU20cqx38iC879PsvxDSWuBOvnfMQ30NH/P7+vTecEw3aeymqjA9//fbtw5t883ba3/8hxFP59a/flokvorh6qWM976D6upx7KqLfya5pvcEo5jZUL4Y61WXk5Xf1bnziQ/zD1c8fssTfD+r6c1ih5vyvRcHY3xWZs16dNjdFnq3K4WHxaTeXZR+V9GIu47l+7+xAlsjd9T+PL3Kz/MnKnV6WzVslg5iLoP0YqlQfqshl/NW7uYy0icq7/c5d0YrenHaK4mLQMayy6CTzSFYhxdvaiI2qvuyGPL5c7KBCtlTFdydaVV9H14uhk+rznjxPb/kRbyNsI17OCVy91OLLTFsvFy/jOX5/6e6grp7W5fxDURVfEQqlFF9F14uhTXUZefXJ9zRHeuKrguGwxJ93IFupp0a3bAko4s8FuY2hTnUdefnreMqyqq9+7arKzFx80xpX4rXaeI2YO7HWb+XPaf/5L7mbTy+yN0EUX0fXj6FK9b6KvD6w4t2ywzDDh3iZh8fn1ULxx+cPUkPT267FF72Hpb36U13Bf6hirHdQv2xEGX9VExdJMDMvA9TR9WKoU11FLr+rd+MRH+Ir4eubZeKBTZTeHZ2d2/wyrCkhPhBexBe1ZjkluhlWlBAfCD/i3YQFC4B4pkA8UyCeKRDPFIhnCsTzRO0d4rMH4pkC8UyBeKZAPFMgnikQzxSIZwrE82TEO8TnDsQzBeKZAvFMgXimQDxTIJ4pEM8UiOfJmHeIz5TGLMSz4qwW4lkB8Uw5u4V4VkA8U1q5o94hPksgninT4l8hPlfaYg3xrNhCPE/GW/ZK/CvE58mcd4jPFIhnyqz4V4jPksnGHeLzZbqsv5YvZjFCfApMVvI1EJ8f0617g1mcEB8/M906iM8ViGeKnneIzw6I54lmTQ/xuTEmHeIzJ5R4+eRUoXyiHsR7IZD45omAu+FzxCHeB6PN+4V32+Kbx47h8WOBCCUeJT4wo+Jf3YqvntOLNj4YwcS7CQs0GfcO8VkTTjyGc0GZEP/qVDw6d2EJJl4xnBMNhscACGh7R4nPi0nxt7cYzuVKOPFuwgJNIJ4p4cQXw7mrF8zVhyKYeNm5Oz6vID4QwcRXwtc3EB+ESe/OS3zB5pfPEB8A/QLvYDi3ki+b4XgO4t0TULybsEAPiGcKxDMF4pkC8UyZ8g7xGaNf4CE+G8ZXMIX4rFG377X4wjrEZ8qM+FuIzxSIZ8qUd4jPGIhnyqz4V4jPkp7sofjXV4jPk34ph3gubCGeJ5ftes87xOfLZX9upsBDfC4MOvIQz4OB+FeIZ8FQvDRfG4f4fBkTfwvxeTP0Ls1DfPYMtUM8BxTlHeI5oPJemIf43FF6L8XfQnzOKL03p2MV3iE+E9Ti62ssIT5f/IjflStbPZHCAicMxDd1vEXxO3EjX47PZuoh3iV98bcVrx35y8Uffm/XLvzvcDW76bDAEf1OfWvdqngqEO+QS/Gtf5vi959eZCsvVzUzDgvc4EO8XN/o8PiiWq52NixwxGUT33kdXlJPFL9pl6NWLFg7ExY4Qi2+U+5tlPjvL6fNSrlA9WxY4IgJ8SOYxV+18XeicL5GGx8RXsQTgXh3lNIr8WMTNsvFH/7dfsQ4PhKq0l6LV/fiLZR4zNxFhx/xmKuPjrp9dy6eBMS743Kaft47xGcBxDOlc0IW4hkxOCEL8Tzoz904FF+M5K7/ecTMXSz4En98Xu3v3zFXHw2+xB++vhXiFc8bOuFp0kHwW+I3qhKPZ8uGoNepd9zGC6Gs6RVPk74IC+zjTfw4KPEh6J+Q1fJufTiHp0kHwOxM/ALxO/F02uBCjGiQ4kdvi7Uo/lAO4ffDh0lqhAUOqMSP3BZrUXzVkCvH8bJTJ2t7xTaId4as6X2Irxpy5TW2hfiyQ7//MhYWWGfrTfw41dxObzjXXo1tfkRAi0a8do/ehfiHq58/ZIm/x3DOG2fx+t4pF1t+/Xt0yHYqJ3duTjsM5zxSd+pdi6cC8a6oCrwH8erTM3phgX1q8ZpztQvEy5uozIF4V3gTPz4tOx8W2Meb+Anq34TqVwHxrmgWsDTxbr1zd3xekcMCGlvN6yuXipcX2YzfRXMYuxYP4l1B0E5dEcP0BE0TFriA4p00gfNG6tdDvCO2PsU/G94xeYJ4Z0A8U0jeKeLHR2yzYYEDfImnAvGOgHie0Jp4iE8emneITx6P4g//kX+PP9C5iwGP4sv5eFxXHwkm4j9+bP5Q7537193YuZi5sMAuen272vhH+Vr+obbxa2PvEO+G29vBo6eU4kvjlXuieEzgRIWW+Kao16V+QYknAPFO0Bdfte3NL8BsLxAfHTriK+uV+Ea+2V5wt2xsaPXtmjq+UwHgbtm4MM4kzQLf9OXP31DSNXG37GxYoKbOHeM7DC/Ft724SfHFJ1Lyxu+WnQ8LlIj67zLxdZ+9L7k7bbNQPAmIn6Iq6sI4m9omvrXbDtj64gfVv1nyzFJlLWz21EV9kfiPnUr9okG3JX58ubP5sEBFJb6Rr8+5pu+Kf50XTz9Jc1IucDgbFihZLL6ejlXZtie+ulvW9J5ZiJ9AlCuHtO+16Tbx7sWjxFun27hTxQ+G6lPeqadl0cZbRYx+mKERr5yjsS+eBMSPY0t812zzyaJ4tPG2EROfJumJ72NdfHs+Hm28NZaKHxmqT3hfUOJNgfhxlOI1MmyiwLsQTwPix1GLn8+xqQJvX/zh4UYujoCTNNYQyo8aZ2wmxQ+m8JaKX6/KE7ObG0JYcIFqsu5c1c/lWSV+TK5l8bKFlxdhoFdvA+UsbftldOLlrB2uwLGBUPm1JP718vzsMvGn9VM5Z7tGVW+BlMQXA/nrd9nDI4QFfYSyJdcVf3t7mhM/5h3DubAsE19sn/I+iWk66UC8AqEctYn+n6nQEJ8mZPFN3wDi00QoJ+hmxYu2iYD4NBlpyNuGf0z8qakpvIpvzs+ZTdpCvIIl4sttkz136yW+vDt+c2N2Lw3EDxnLkxnxnW1TQ3X7Jb6+EONvo0lbiB8yKl5oiC8hal92seX/hs8Ymw0LuoznidAUT9RO7dytixb+5vBgtKAtxA+ZzRMxeHPxwbN4ChA/hCa++x7iU2Q+SyITvxsfzcnnlqi3QfwAjSyp/0VEIX6icW8WsleM9CB+AE18L5Rf8ePDuGaT4l8gfkBq4ieWN0SJN0AnRxrxI/1731X9eBs/vg3ie4gExdOA+B5G4jv/fBEI4hNDqM7DK/+v/hte/OHr3xNVPYZzegjdlc2a0/LhxU+Czp0mmjV9MuIVwznRYLarzNHOjQvxl+H8ih+fuUOJ18MgM8T5cg1FNeFV/NRpOQzntEhUPO6PXwpJvGok4FU85cEkEN/DJDPaazJUIwG/JX5iODcXNjOIXVajUN3p+kHAZmHLrc6TaRaXeBI5ijdfbboJRwijFr+tvZuat5zgiScVQXw3nK0wpe/t1pP447O4/udR+WiS6kJM/YQnjbIMaoazFEgK3/oSX8jd37+PXFV/UP8gIL4fzBbbDs7FF8O5QjyWQiGKt5oRXsVXJR6LGIv2j3kwW3gVj0WMK2ji7ebDlmreX6IzFW98XBCfPDGIJ9f1pESXVT37xY9GTpTqhbLG9gKX4uubJrkvdxaneF3zlFRjvfoSknj7uUA0b7aTOtllYede4sXgjVEoa3gUPzEhPxs2fcTFa3Ti9cyb7QS9+vOZWJJ4F5kA8V5QLFJicFLei3gt9Wb76FT1ps8pyEf8cMYurHhabW+2hzLduyt5/m1/Z7QQSk7ihxc9ah+bs0zwIP74vTrvujda+igz8WL4pW5gVxiaN4tcJnziFvjZsOkzMk2reXBO88C1eN4lfuQoohM/a94sbrTxY0ehd3Rpi2fdqyeI79w26DYPjMybRc1+HD96EONH1x0CQHyq0MQTT+SZAvHuMBffne1xnQUm5s1ihnjaBohPnekaffTryr7zHIB4ZxDFDyd5XaFt3ixa7uKnBm2TX3sTf1KLH/4KzGKFeNNNrXhvh68wryr+ZpFCvOEm0b4GFK+s980ihXjDTZ6mbnpcile3+GZxQrzhprDit33xPflmcUK8wSah/NY9F+Lb9/1ibxYnxBtsEh4b9h498WNje7MoIV5/k/AxZaNkOwHEU5g8hMuNoWr6afFbiCdgLD4Mk+Ib92ZRQrz+xpDHq2HeLEKI194Y9nAh3iq5iN9CvBnThyAmPnkH4i0ycwTtvHz32otQzBZ5s+ggfnp79SSOcAO5DnPmzWKDeJ1/gHhrYaNA/wD8XXYxwYx5s8ggXvM/IzhYiLcFxNOIIC+WkZj4GfNmcXEWb5L+KB6yB/F2MBLvLBUGQLwdkhM/bd4sKm7iYxqYmwPxZJrZ1ygG5uZAPBHRFvYoemvG+BSf1fPjS+tRnHMh0lHsWHxeT5MWnb9J0jHsWPzEWmgJ5l+CSR4HJV6b9FI8g8s2Pqfnx6eX4jnQq59AKN5lg0/xooEQNgCdh7QnkmIzHHbuZG2veBphGtlYjd3aK6gyxJn4skO//2IeNgY6iUylijLHkfhyceNEh3Ni9ENWuBD/cPXzx5tyaesU8jGFNFrASefu+CxuTrs0h3MJJNEOGM51ybdRHwDxHWJPn1UgviXy5NkG4hsiT15g8hUfd+qCk634qBMXAbmKjzltUZCp+IiTFgkQz5Q8xcebsmiAeKZkJF4o3wI1+YgX1QXzItG7o3yTk/hTpT3bK22sko14FlfaWCRH8XElLFJyER9TWpIA4pkC8UzJRHxESUkEiGdK8uKTv+M9EKmLj2Rl6fSAeKbEIZ4cU2Ud3s2JQjx1jlWggScTXHxZZknzrZiSX0J48Rc3rmtX3NC+iNDi666Z6HyhFy28LyMG8d2ozn306djhfSGRiRfnP1Oxo3lfTIziT3OX0UD7cgKL7ws/fxRTscO7BeIUPxk9vNsgrHjRfydGNtreLQgs/vJKeB3x6NfZIaD4wXzdRXzK6KHdEuHED4u3hnh4t0Uw8ZeBh0vjKqKHd2sEEa8erA2+mv8CkAkhXmj20DSqAEAljHjN/9Pp7QEaAcQbBKOdqAcaxC1+ONQHlvAu3nACRijeAQv4Fm8cpvmhwLtdfIkX5+UqjHeT0PNv0sFniYe9iAh9IQYIBMQzBeKZAvFMgXimQDxTIJ4pEM8UiGcKxDMF4pkC8UyBeKbMy9vfladF03yaNBhjVt7x+al83V0n+fx4MMKsvMPXt97rqbkyAhdHJM2SEg8SZr7UHh7G2niQMKiumQLxTIF4pkA8UyCeKRDPFIhnCsQzBeKZAvFMgXimWBQvgGvsybIqHkHjDeoyruQyg1NQl3EllxmcgrqMK7nM4BTUZVzJZQanoC7jSi4zOAV1GVdymcEpqNO4QEJAPFMgnikQzxSIZwrEMwXimQLxTIF4pkA8U2yJPzwI6n3UcsmNJ+p+m7u4CQHF1QstaJFg4r3D+89v1Kwqgy7Kqj6WxMv839yQgh4eX077T0QHpw01I9ZP1Fv+ZYI3pKA7+YOhZVUZdFlW9bEkXq6XUf4mzdnJTFgT9e1/+0YL2Vngw3if9++04OurP4ssImVVFXRRVl1gSXyZGY/k3yI16PH7T2JVv7//g1rV00t8KZyYVc1vZUEu97AkXtaa9CQdn1e0gJsVtY3f3z2VCijQ+zPSHjGravHkrLokhhJ/eCAeTLFXsnh6gmUru6P17haXeHJWDQjfxpeFj8amvNiclBWH38niF9Rue2ob3/bqLfXpLfbqV9Re/bKDIQ/n1uSqfmGJJ2ZVWVnY8x7BOL4qttQjIosvEkxdyGsnqP3CheP4ZVnVBzN3TIF4pkA8UyCeKRDPFIhnCsQzBeKZAvFMgXimQDxTIJ4pEM8UiGcKxDMF4pkC8UyBeKZAPFMgnimsxR+fy3uSaFcHJw5r8eWV0tTbARKHt3hZ2ter9lrr6i7k/W/fGDxBmbn4w+Of8q6KdXmPQ3kX8uc3m7ctxAtz8dX99dJ4feNz8cKj7ucuvrm3pbo5Zi2KKh/iOVCJr0v7w1NZ1UM8AyrLRRu/u34v70v89ALxHGhuOy9r+o0Qv357gniQMRDPFIhnCsQzBeKZAvFMgXimQDxTIJ4pEM8UiGcKxDMF4pkC8UyBeKZAPFMgnikQz5T/A8C0uuW/DtUQAAAAAElFTkSuQmCC" alt="plot of chunk unnamed-chunk-1"/></p>
 
 </div>
 
 </section>
 <section data-transition="default" data-transition-speed="default">
-<h3>Explanation of Forecast Plot</h3>
+<h3>Analysis</h3>
 <div class="slideContent" >
-<p>An exponential smoothing model was applied to the training time series data. A forecaset model was then built on this exponential smoothing model. The forecast plot shows the Apple monthly opening stock prices from the exponential smoothing model (black line), the test data for the current year to date and previous year (green line), and the forecast prices for the previous 18 months and the 6 months ahead (blue line).</p>
+<p>The model can be used to forecast future stock prices.</p>
 
-<pre><code class="r">accuracy(fcast, ts1Test)
+<pre><code class="r">price6m &lt;- round(fcast$mean[24], 2)
+price6m
 </code></pre>
 
-<pre><code>                      ME      RMSE       MAE        MPE      MAPE
-Training set  0.09031689  5.197327  3.645054 -0.6333067  6.826203
-Test set     37.80100093 40.491337 37.801001 22.6837279 22.683728
-                  MASE       ACF1 Theil&#39;s U
-Training set 0.1975274 0.07876251        NA
-Test set     2.0484564 0.66493137  3.851784
+<pre><code>[1] 127.08
 </code></pre>
 
-</div>
-
-</section>
-<section data-transition="default" data-transition-speed="default">
-<h3>Intended Use</h3>
-<div class="slideContent" >
+<p>The forecast of the Apple opening monthly price for 6 months into the future is $127.08. If Apple stock can be purchased at or near these levels, it may be a worthwhile investment. However, the test data on the forecast plot (green line) shows a much higher price which means other, possibly short-term factors, are influencing the price. Therefore, caution should be used before deciding on such an investment.</p>
 
 </div>
 
