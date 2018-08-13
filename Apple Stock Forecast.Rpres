@@ -13,7 +13,7 @@ The objective of this model is to forecast the underlying trend in Apple stock p
 
 This presentation describes how the data is prepared and used to build a forecast model. The interactive Shiny app has been published [here](https://garystocks.shinyapps.io/Assignment/). The full code to build the model can be found on github [here](https://github.com/garystocks/dataproducts3).
 
-The model forecasts an upward trend in the Apple stock price. However, the actual stock prices for the preceding 18 months, used as test data, are much higher than the forecast values. This suggests the model may be under-estimating the price which may be due to short-term factors and would need to be taken into account when deciding on the best time to invest.
+The model forecasts an upward trend in the Apple stock price. However, the actual stock prices for the preceding 20 months, used as test data, are much higher than the forecast values. This suggests the model may be under-estimating the price which may be due to short-term factors and would need to be taken into account when deciding on the best time to invest.
 
 Data Preparation
 ========================================================
